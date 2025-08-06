@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <style>
+        body{
+            background-color: rgb(25, 25, 25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        p{
+            color: white;
+            font-family: Arial;
+        }
+        .image{
+          height: 55px;
+          width: 55px;
+          padding: 15px;
+        }
+        .pic{
+            height: 55px;
+            width: 55px;
+            
+        }
+        .rps{
+          height: 125px;
+          width: 125px;
+          border: 3px solid white;
+          background-color: rgb(25, 25, 25);
+          border-radius: 65px;
+          margin: 8px ;
+        }
+        .intro{
+          font-size: 30px; 
+          font-weight: bold; 
+          margin-top: 100px;
+        }
+        .reset_b{
+            height: 40px;
+            width: 130px;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        @media (max-width:700px) {
+          .rps{
+          height: 100px;
+          width: 100px;
+          border: 3px solid white;
+          background-color: rgb(25, 25, 25);
+          border-radius: 65px;
+          margin: 8px ;
+          }
+          .intro{
+          margin-top: 80px;
+          }
+        }
+    </style>
+    <p class="intro">Rock Paper Scissors</p>
+    <div>
+    <button onclick="function1('rock')" class="rps"> <img class="image" src="rock-emoji.png"> </button>
+    <button onclick="function1('paper')" class="rps"> <img class="image" src="paper-emoji.png"> </button>
+    <button onclick="function1('scissors')" class="rps"> <img class="image" src="scissors-emoji.png"> </button>
+    </div>
+    <p class="final_result"></p>
+    <p class="moves"></p>
+    <p class="result"> wins : 0 , losses : 0 , ties : 0 </p>
+    <button onclick="reset_f()" class="reset_b">reset score</button>
+     <script>
+     let wins=0,losses=0,ties=0 ;
+     let choice,player_choice;
+     function function1(player_choice){
+      let random_choice = Math.random();
+      if (random_choice>0 && random_choice<=1/3) {
+        choice='rock';
+      }else{
+        if (random_choice>1/3 && random_choice<=2/3) {
+          choice='scissors';
+        }else{
+          choice='paper';
+        }
+      }
+      if(choice===player_choice){
+        ties++;
+         document.querySelector('.final_result').innerHTML=' Tie !';
+      }else{
+        if((choice==='rock' && player_choice==='paper')|| (choice==='paper' && player_choice==='scissors')||(choice==='scissors' && player_choice==='rock')){
+         wins++;
+         document.querySelector('.final_result').innerHTML=' You win !';
+        }else{
+          losses++;
+         document.querySelector('.final_result').innerHTML=' You loose !';
+        }
+      }
+        document.querySelector('.result').innerHTML = `wins : ${wins} , losses : ${losses} , ties : ${ties}`;
+        document.querySelector('.moves').innerHTML=`You <img class="pic" src="${player_choice}-emoji.png"> 
+        computer <img class="pic" src="${choice}-emoji.png">`
+     }
+     function reset_f() {
+      wins=0; losses=0; ties=0;
+      document.querySelector('.result').innerHTML = `wins : ${wins} , losses : ${losses} , ties : ${ties}`;
+     }
+  </script>
+    
+</body>
+</html>
